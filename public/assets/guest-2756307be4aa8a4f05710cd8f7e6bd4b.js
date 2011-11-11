@@ -1,0 +1,1 @@
+(function(){this.disable_buttons=function(a){return console.log(a),a?($(".disabled_unless_guest").attr("disabled",null),$(".disabled_if_guest").attr("disabled","disabled")):($(".disabled_unless_guest").attr("disabled","disabled"),$(".disabled_if_guest").attr("disabled",null))},$(function(){return disable_buttons($("#accept_number").length>0)})}).call(this)

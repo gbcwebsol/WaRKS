@@ -1,0 +1,31 @@
+- content_for :script do
+  = javascript_include_tag "lobby" 
+
+%section#uketsuke
+  #summary
+    %h1
+      受付入力
+    %div.mb70
+      %img{ "src" => "/assets/lobby_new_img01.jpg"}
+    %div#uidwrap.mb70
+      %img{ "src" => "/assets/lobby_new_img03.png"}
+      %div.uid
+        診察番号
+    %div
+      %img{ "src" => "/assets/lobby_new_img02.jpg"}
+    .homebtn
+      = link_to lobby_index_path do
+        %img{ "src" => "/assets/home_btn.jpg" }
+
+  - @guest.errors.full_messages.each do |msg|
+    = msg
+
+  = form_for :guest, :url => "/lobby" do |f|
+    = f.hidden_field :uid
+    .row
+      - @departments.each do |department|      
+        = department_checkbox(f,department)    
+
+    %div.btnarea
+      = f.submit "create", :type => 'image', :src => "/assets/lobby_new_btn.png"
+  

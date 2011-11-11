@@ -1,0 +1,12 @@
+!!!
+%html
+  %head
+    %title WaRKS
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = yield :script
+    = csrf_meta_tags
+  %body
+    .container
+      .pageContent
+        = yield

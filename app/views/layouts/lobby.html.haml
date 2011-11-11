@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title WaRKS
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "#{Settings.faye_server}/faye.js"
+    = javascript_include_tag "application"
+    = yield :script
+    = csrf_meta_tags
+  %body
+    .body-inner
+      %header
+        %div.inner
+          -#%img{ :src => "/assets/logo.png" }
+          %span#clock
+      .container
+        .pageContent
+          = yield
+      %footer
+        %div
+          院内情報が入ります

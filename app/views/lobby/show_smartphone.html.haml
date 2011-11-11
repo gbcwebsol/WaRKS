@@ -1,0 +1,46 @@
+!!!
+%html
+  %head
+    %title WaRKS
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    %meta{ "name" => "viewport", "content" => "width=device-width , user-scalable=no , inicial-scale=1 , maximum-scale=1"}
+  %body#smartphone
+
+    %header
+      %img{ "src" => "/assets/sp_header.jpg" }
+    %section#uketsuke_smartphone
+      .section_name.midashi
+        = @guest.department.name
+      %table{ "style" => "width:320px;" }
+        %tr
+          %th 呼出番号
+          %td= @guest.accept_number
+        %tr
+          %th 待ち人数
+          %td= @guest.department.active_guests.size
+        %tr
+          %th 受付時間
+          %td= @guest.created_at.strftime('%H:%M')
+        %tr
+          %th.f16 現在の<br />呼出番号
+          %td
+            - @guest.department.sections.each do |sec|
+              %p
+                = sec.full_name
+                %span
+                  -if sec.guest
+                    = sec.guest.accept_number
+          
+        %tr
+          %th.f14 呼出済み番号
+          %td
+            - @guest.department.pass_guests.each do |guest|
+              = guest.accept_number
+      .midashi 診察について
+
+      %footer
+        %img{ "src" => "/assets/sp_footer.jpg" }
+
+      .row

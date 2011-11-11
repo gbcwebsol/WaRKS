@@ -1,0 +1,35 @@
+- content_for :script do
+  = javascript_include_tag "lobby" 
+
+%section#uketsuke_finish
+
+  #summary
+    .section_name
+      = @guest.department.name
+    .homebtn
+      = link_to lobby_index_path do
+        %img{ "src" => "/assets/home_btn.jpg" }
+    .backbtn
+      = link_to new_lobby_path do
+        %img{ "src" => "/assets/back_btn.jpg" }
+
+  %table
+    %tr
+      %th 呼出番号
+      %td= @guest.accept_number
+    %tr
+      %th 待ち人数
+      %td= @guest.department.active_guests.size
+    %tr
+      %th 受付時間
+      %td= @guest.created_at.strftime('%H:%M')
+
+  .row.qr_box
+    .span9.qr_code_text
+      スマートフォンでこちらの受付完了画面を確認する事ができます。
+      こちらのQRコードをお読み取りください。
+
+    .span2.qr_code
+      -#= image_tag "http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=http://rcp.gbcweb.biz#{smartphone_lobby_index_path(@guest)}"
+      = image_tag "http://chart.apis.google.com/chart?chs=300x300&cht=qr&chl=#{smartphone_lobby_index_url(@guest)} "
+

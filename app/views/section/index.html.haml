@@ -1,0 +1,7 @@
+%section
+  .page_header
+    
+  - @departments.each do |department|
+    - department.sections.each do |section|
+      .well.span4
+        = link_to section.full_name, section_path(section)

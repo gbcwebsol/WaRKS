@@ -1,0 +1,122 @@
+$warter :#93c6dc;
+
+#matiai_admin {
+  h1 {
+    font-size: 3em;
+    line-height: 2em;
+  }
+
+  #current_guest table {
+    border-collapse: collapse;
+    border: {
+      color: $warter;  
+      width: 3px;
+    }    
+    td  {
+      border: {
+        color: $warter;  
+        width: 1px;
+      }
+    }
+    .labell {
+      text-align: center;
+      width: 100px;
+      color: $warter;
+      font: {
+        weight: bold;
+      }
+    }
+    .value {
+      width: 200px;
+    }
+  }
+
+  table.matiai_itiran,
+  table.skip_itiran{
+    border: {
+      color: $warter;  
+      width: 3px;
+    }
+
+    th {
+      border: {
+        bottom: {
+          color: $warter;  
+          width: 3px;      
+        }
+        left: {
+          color: $warter;  
+        }
+      }
+    }
+
+    td {
+      border: {
+        left: {
+          color: $warter;  
+        }
+        top: {
+          color: $warter;  
+        }
+      }
+    }
+  }
+}
+
+#current_guest {
+  th {
+    width: 100px;
+  }
+  #value {
+    width: 100px;
+  }
+  #accept_number_row {
+    width: 150px;
+
+    #accept_number {
+      margin : {
+        left: 0.5em;
+        top: 0.5em;
+      }
+      font: {
+        size: 5em;
+      }
+    }
+  }
+
+  form {
+    display : inline;
+  }
+}
+
+.matiai_itiran,
+.skip_itiran {
+  th,td{
+    text-align: center;
+    vertical-align: middle;
+    font: {
+      size: 1.7em;
+    }
+  }
+
+  th.accept_number {
+    width :140px;
+  }
+  th.uid {
+    width :200px;
+  }
+  th.name {
+    width :200px;
+  }
+  th.time {
+    width :200px;
+  }
+  th.ctrl {
+    width :150px;
+  }
+
+  form {
+    display : inline;
+  }
+}  
+  

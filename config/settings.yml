@@ -1,0 +1,11 @@
+defaults: &defaults
+  faye_server: http://localhost:9292
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  faye_server: http://rcp.gbcweb.biz:9292

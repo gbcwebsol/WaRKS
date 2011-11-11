@@ -1,0 +1,46 @@
+- content_for :script do
+  = javascript_include_tag "lobby" 
+
+%section#lobby
+  #summary
+    %h1
+      外来待合状況
+    %p
+      %img{ "src" => "/assets/lobby_index_img01.jpg"}
+  .row
+    - @departments.each do |department|
+      .span8{ :id => "#{department.id}-box" }
+        %table
+          %tr
+            %td.department_name{ "rowspan" => "3" }
+              = department.name
+            %td.current_number{ "colspan" => "2" }
+              %span.label 現在の呼出番号              
+              - section_multi_class = department.sections.size > 1 ? "section_multi" : ""
+              - num_parent_multi_class = department.sections.size > 1 ? "num_parent_multi" : "num_parent"
+              - department.sections.each do |section|
+                %div{ :id => "#{department.id}-#{section.id}-box", :class => "#{section_multi_class}" }
+                  - if section.name
+                    = section.full_name
+                  %div{ :class => "#{num_parent_multi_class}" }
+                    %span.num
+                      - if section.guest
+                        = section.guest.accept_number
+                      
+
+          %tr
+            %td.wait_num
+              %span.label 待ち人数                
+              %span.num
+                = department.active_guests.count
+              %span.nin 人
+              
+            %td.skip_num
+              %span.label 呼出済番号
+              %span.num
+                - department.pass_guests.each do |guest|
+                  = guest.accept_number
+  %p.btnarea
+    = link_to new_lobby_path do
+      %img{ "src" => "/assets/lobby_index_btn.png" }
+

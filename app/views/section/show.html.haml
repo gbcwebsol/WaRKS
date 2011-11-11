@@ -1,0 +1,85 @@
+- content_for :script do
+  = javascript_include_tag "section"
+
+%section#matiai_admin
+  .row
+    .span4
+      %h1= @section.full_name
+      = form_tag anaunce_section_index_path(@section), :method => :get, :remote => true do
+        = submit_tag "アナウンス", :class => "btn success large disabled_unless_guest"
+      = form_tag create_guest_section_path(@section), :method => :post, :remote => true do
+        = submit_tag "呼出", :class => "btn success large disabled_if_guest"
+
+    .well.span11#current_guest
+      %table
+        %tr
+          %td#accept_number_row{ "rowspan" => "3" }
+            現在の呼出番号
+            - if @section.guest
+              #accept_number
+                = @section.guest.accept_number
+            - else
+              #accept_number_nothing
+                無し
+          %td.labell 診察番号
+          %td.value
+            = @section.guest.uid if @section.guest          
+        %tr
+          %td.labell 氏名          
+          %td.value
+            = @section.guest.name if @section.guest
+        %tr
+          %td.labell 受付時間
+          %td.value
+            = @section.guest.created_at.strftime('%H:%M') if @section.guest
+
+      = form_tag guest_section_path(@section), :method => :delete, :remote => true  do
+        = submit_tag "終了", :class => "btn success large disabled_unless_guest"
+      = form_tag guest_section_path(@section), :method => :put, :remote => true  do
+        = submit_tag "スキップ", :class => "btn warning large disabled_unless_guest"
+      = form_tag guest_path(@section.guest), :method => :delete, :remote => true do
+        = submit_tag "取消", :class => "btn danger large disabled_unless_guest"  
+  
+  %h2 待合一覧表
+  %table.zebra-striped.matiai_itiran
+    %thead
+      %tr
+        %th.accept_number 呼出番号
+        %th.uid 診療番号
+        %th.name 氏名
+        %th.time 受付時間
+        %th.ctrl 操作一覧
+
+    %tbody
+      - @active_guests.each do |guest|
+        %tr{ :id => "row_#{guest.id}" }
+          %td= guest.accept_number
+          %td= guest.uid      
+          %td= guest.name
+          %td= guest.created_at.strftime('%H:%M')
+          %td          
+            = form_tag create_guest_section_path(@section,guest), :method => :put, :remote => true do
+              = submit_tag "呼出", :class => "btn success disabled_if_guest"            
+            = form_tag guest_path(guest), :method => :delete, :remote => true do
+              = submit_tag "取消", :class => "btn danger"
+
+  %h2 スキップ一覧表
+  %table.zebra-striped.skip_itiran
+    %tr
+      %th.accept_number 呼出番号
+      %th.uid 診療番号
+      %th.name 氏名
+      %th.time 受付時間
+      %th.ctrl 操作一覧
+
+    - @pass_guests.each do |guest|
+      %tr{ :id => "row_#{guest.id}" }
+        %td= guest.accept_number
+        %td= guest.uid      
+        %td= guest.name
+        %td= guest.created_at.strftime('%H:%M')
+        %td
+          = form_tag create_guest_section_path(@section,guest), :method => :put, :remote => true do
+            = submit_tag "呼出", :class => "btn success disabled_if_guest"
+          = form_tag guest_path(guest), :method => :delete, :remote => true do
+            = submit_tag "取消", :class => "btn danger"

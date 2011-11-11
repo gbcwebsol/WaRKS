@@ -1,0 +1,64 @@
+log = (data) ->
+  console.log(data)
+exec = (data) ->
+  eval(data)
+
+faye = new Faye.Client("<%= Settings.faye_server %>/faye")
+faye.subscribe('/messages/new', exec )
+
+this.last_sound_clear = () ->
+  @last_sound = null
+
+last_sound_clear()
+
+this.sound_list = (sound_paths) ->
+  sounds = ( new buzz.sound(path) for path in sound_paths )
+  last = sounds[(sounds.length)-1]
+  if sounds.length > 1
+    for i in [0...(sounds.length-1)]
+      do (i) ->
+        sounds[i].bind 'ended', (e) -> sounds[i+1].play()
+
+  if @last_sound
+    @last_sound.bind 'ended', (e) -> sounds[0].play()
+  else
+    sounds[0].play()
+
+  @last_sound = last
+  last.bind 'ended', (e) -> last_sound_clear()
+
+class KeyWatcher
+  @last_time = null
+  press: (e) ->
+    key=String.fromCharCode(e.keyCode)
+    current_time = ~~(new Date/100)
+    div = $("#uketsuke .uid")
+    hidden = $("#guest_uid")
+    if @last_time == null || current_time - @last_time < 3
+      div.append(key)
+    else
+      div.empty()
+      div.append(key)
+
+    hidden.val(div.html())
+    @last_time = current_time
+
+watcher = new KeyWatcher()
+window.onkeypress = (e) ->
+  watcher.press(e)
+
+this.clock = () ->
+  date = new Date()
+  $("#clock").text(date.getFullYear() + "/" + ( date.getMonth() + 1 ) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() )
+  setTimeout( "clock()", 1000)
+
+$ ->
+  clock()
+
+  $("input[type=radio]:checked").parent().addClass("checked")
+  radios = $("input[type=radio]")
+  radios.live "change", (e) ->
+    $(radio).parent().removeClass("checked") for radio in radios
+    $(this).parent().addClass("checked")
+
+
