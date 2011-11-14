@@ -1,11 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.0'
 gem 'sqlite3'
+gem 'sprockets', '2.0.2'
 
 group :assets do
-  gem 'sass-rails', :git => 'git://github.com/rails/sass-rails.git', :branch=>'3-1-stable'
-  #gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails', "  ~> 3.1.0"
   gem 'uglifier'
 end
 
