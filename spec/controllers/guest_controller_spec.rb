@@ -5,8 +5,8 @@ describe GuestController do
   
   describe "ゲストの受付完了パターン" do
     before do
-      @guest = Factory.create(:guest)
-      @section = Factory.create(:section)
+      @guest = FactoryGirl.create(:guest)
+      @section = FactoryGirl.create(:section)
       @guest.department.sections << @section
       @guest.section = @section
       @guest.save

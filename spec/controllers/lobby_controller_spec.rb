@@ -5,7 +5,7 @@ describe LobbyController do
 
   describe "ゲストの新規作成" do
     before do
-      @department = Factory.create(:department)
+      @department = FactoryGirl.create(:department)
       post :create, {:guest =>{ :uid => "hogehoge", :department_id => @department.id}}
     end
 
