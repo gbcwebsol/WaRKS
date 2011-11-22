@@ -5,3 +5,5 @@
 require File.expand_path('../config/application', __FILE__)
 
 Warks::Application.load_tasks
+
+task :test => [:'db:migrate', :spec]
