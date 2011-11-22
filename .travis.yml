@@ -2,3 +2,6 @@ rvm:
   - 1.9.2
   - 1.9.3
   - ruby-head
+env:
+  - DB=sqlite
+script: "bundle exec rake db:drop db:create db:migrate spec"
