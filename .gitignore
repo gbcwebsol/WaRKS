@@ -1,6 +1,9 @@
 .bundle
 .sass-cache/
 /.rvmrc
+.*~
+*~
+*.*~
 coverage
 db/*.sqlite3
 log/*.log
