@@ -4,8 +4,8 @@ require 'spec_helper'
 describe Section do
 
   before do
-    @department = Factory.create(:department)      
-    @section = Factory.create(:section)      
+    @department = FactoryGirl.create(:department)      
+    @section = FactoryGirl.create(:section)      
     @department.sections << @section
   end
 

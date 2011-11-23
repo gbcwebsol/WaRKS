@@ -6,10 +6,10 @@ describe SectionController do
   describe "ゲストを受付" do
     
     before do
-      @guest1 = Factory.create(:guest)
-      @guest2 = Factory.create(:guest)
-      @section1 = Factory.create(:section)
-      @section2 = Factory.create(:section)
+      @guest1 = FactoryGirl.create(:guest)
+      @guest2 = FactoryGirl.create(:guest)
+      @section1 = FactoryGirl.create(:section)
+      @section2 = FactoryGirl.create(:section)
       @guest1.department.sections << @section1 
       @guest2.department.sections << @section2     
     end
@@ -50,8 +50,8 @@ describe SectionController do
 
   describe "ゲストの受付完了パターン" do
     before do
-      @guest = Factory.create(:guest)
-      @section = Factory.create(:section)
+      @guest = FactoryGirl.create(:guest)
+      @section = FactoryGirl.create(:section)
       @guest.department.sections << @section
       @guest.section = @section
       @guest.save

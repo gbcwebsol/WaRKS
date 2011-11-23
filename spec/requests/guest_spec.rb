@@ -112,16 +112,18 @@ describe "Guest" do
     it "現在の呼出番号という文言が存在すること" do
       page.should have_content("現在の呼出番号")
     end
-    
-    describe "呼出ボタンを押す", :js => true  do
-      
-      before do
-        click_button '呼出'        
-      end
 
-      it do
-        guest = @d.guests.first
-        page.find('#accept_number').text.should == guest.accept_number.to_s
+    unless ENV['ON_TRAVIS']
+      describe "呼出ボタンを押す", :js => true  do
+
+        before do
+          click_button '呼出'        
+        end
+
+        it do
+          guest = @d.guests.first
+          page.find('#accept_number').text.should == guest.accept_number.to_s
+        end
       end
     end
 

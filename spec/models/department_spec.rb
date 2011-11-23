@@ -4,14 +4,14 @@ describe Department do
   
   describe "associations" do
     before do
-      @department = Factory.create(:department)
-      @section1 = Factory.create(:section)
-      @section2 = Factory.create(:section)
+      @department = FactoryGirl.create(:department)
+      @section1 = FactoryGirl.create(:section)
+      @section2 = FactoryGirl.create(:section)
       @department.sections << @section1
       @department.sections << @section2
 
-      @guest1 =  Factory.build(:guest_free)
-      @guest2 =  Factory.build(:guest_free)
+      @guest1 =  FactoryGirl.build(:guest_free)
+      @guest2 =  FactoryGirl.build(:guest_free)
       @department.guests << @guest1
       @department.guests << @guest2
       @guest1.save
