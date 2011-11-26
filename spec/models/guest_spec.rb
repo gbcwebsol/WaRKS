@@ -4,8 +4,8 @@ describe Guest do
 
   describe "logical delete" do
     before do 
-      @guest1 =  Factory.create(:guest)
-      @guest2 =  Factory.create(:guest)
+      @guest1 =  FactoryGirl.create(:guest)
+      @guest2 =  FactoryGirl.create(:guest)
     end
 
     it do
